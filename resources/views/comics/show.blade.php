@@ -23,13 +23,14 @@
     </div>
     
     <div class="row justify-content-center py-3">
-        <div class="col-sm-9 d-flex">
+        <div class="col-sm-9 d-flex justify-content-between">
+            
             <div>
                 <h2 class="">{{$comic->title}}</h2>
                 
                 <div class="p-2 my-bg-green text-white d-flex justify-content-between "> 
                                            
-                    <h6>U.S. Price:€{{number_format($comic->price)}}</h6> 
+                    <h6>U.S. Price:${{number_format($comic->price)}}</h6> 
                     <h6>AVAILABLE</h6>
                     <h6>Sale date{{date('d/m/Y', strtotime($comic->sale_date))}}</h6>
                 </div>
@@ -45,8 +46,32 @@
         </div>
        
     </div>
+   <div class="text-center p-4">
+    <form action="{{route("comics.destroy", $comic->id)}}" method="POST" id="delete-btn" >
+        @csrf
+        @method('delete')
 
+        <button class="btn btn-danger">Delete Comic</button>
+
+    </form>
+   </div>
+   
 </div>
+<script>
+    const deleteBtn = document.getElementById("delete-btn");
+
+    deleteBtn.addEventListener("submit", function(e){
+        e.preventDefault();
+        
+        const confirmBtn = confirm("Are u sure u want to delete this comic?");
+
+        if(confirmBtn ===  true){
+            deleteBtn.submit();
+        }
+        
+    })
+   </script>
+
 <div class="row justify-content-center my-grey-bg">
 
     <div class="col-sm-8 p-4 d-flex ">
