@@ -1,0 +1,43 @@
+.my-bgc-footer-img{
+    background-image: url('../img/footer-bg.jpg');
+    background-size: cover;
+  
+}
+.footer-link-list{
+    display: flex;
+    
+    h3{
+        color: white;
+    }
+    ul{
+        list-style: none;
+        color: rgb(138, 135, 135);
+        padding: 0;
+        margin-right: 8rem;
+    }
+}
+
+
+.my-bgc-footer{
+    background-color: #292929;
+    
+}
+.footer-banner{
+    display: flex;
+    justify-content: space-between;
+}
+.clr-blue{
+    color: rgb(63, 140, 255);
+    margin: 0;
+}
+.social-container{
+    display: flex;
+    align-items: center;
+
+}
+.social-icon{
+    padding: 0 1rem;
+    img{
+        padding: 0 .5rem;
+    }
+}

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Comic;
+use DateTime;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 
 class ComicController extends Controller
@@ -29,7 +31,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        return view("comics.create");
     }
 
     /**
@@ -40,7 +42,19 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->all();
+        $comic= new Comic();
+        $comic->title = $data['title'];
+        $comic->thumb = $data['thumb'];
+        $comic->price =(float)$data['price'];
+        $comic->series =$data['series'];
+        $comic->type=$data['type'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->save();
+
+        return redirect()->route("comics.show",$comic->id);
+
+
     }
 
     /**
@@ -52,7 +66,7 @@ class ComicController extends Controller
     public function show($id)
     {
         //dd($id);
-        $comic = Comic::find($id);
+        $comic = Comic::findOrFail($id);
         return view ("comics.show",  [
             "comic" => $comic
         ]);
@@ -67,7 +81,18 @@ class ComicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+
+        if(!$comic){
+           abort(404);
+
+        }
+        return view ("comics.edit",  [
+            "comic" => $comic
+        ]);
+
+        
+
     }
 
     /**
@@ -79,7 +104,17 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=$request->all();
+        $comic= new Comic();
+        $comic->title = $data['title'];
+        $comic->thumb = $data['thumb'];
+        $comic->price =(float)$data['price'];
+        $comic->series =$data['series'];
+        $comic->type=$data['type'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->save();
+
+        return redirect()->route("comics.show",$comic->id);
     }
 
     /**
